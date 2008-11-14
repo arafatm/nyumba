@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  mls: MyString
+  link: MyString
+  address: MyText
+  geocode: MyString
+  bedrooms: 1
+  bathrooms: 1
+  acres: 1.5
+  price: 1
+  taxes: 1
+  year: 1
+
+two:
+  mls: MyString
+  link: MyString
+  address: MyText
+  geocode: MyString
+  bedrooms: 1
+  bathrooms: 1
+  acres: 1.5
+  price: 1
+  taxes: 1
+  year: 1
