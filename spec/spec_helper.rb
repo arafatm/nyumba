@@ -45,3 +45,9 @@ Spec::Runner.configure do |config|
   # 
   # For more information take a look at Spec::Example::Configuration and Spec::Runner
 end
+
+Dir[File.dirname(__FILE__) + '/shared_behaviors/*_behavior.rb'].collect do |f|
+  File.expand_path(f)
+end.each do |file|
+  require file
+end
