@@ -1,0 +1,3 @@
+- form_for :house, @house, :url => house_path(@house), :html => {:method => :post} do |form|
+  = render :partial => 'houses/form', :locals => {:form => form}
+  = submit_tag 'Create'

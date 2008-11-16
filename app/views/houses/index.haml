@@ -1,6 +1,15 @@
-- @houses.each do |house|
-  %h1= house.mls
-  %h1= house.address
+%h1 Listing houses
 
-.paths
-  = flash[:link] 
+- @houses.each do |house|
+  %div.house
+    %h1= link_to house.mls, house.link
+    = house.address
+    %br
+    = house.address
+    %div
+      = link_to 'Show', house
+      = link_to 'Edit', edit_house_path(house)
+      = link_to 'Destroy', house, :confirm => 'Are you sure?', :method => :delete
+%br 
+
+= link_to 'New house', new_house_path
