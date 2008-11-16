@@ -7,7 +7,7 @@ class HousesController < ApplicationController
   def index
     self.resources = find_resources
 
-    gg = GoogleGeocode.new YAML.load_file("#{RAILS_ROOT}/config/gmaps_api_key.yml")[RAILS_ENV]
+    gg = geocode
     @map = GMap.new("map_div")
     @map.control_init(:large_map => true,:map_type => true)
     @map.center_zoom_init([36.058887, -86.782056],10)
@@ -28,12 +28,21 @@ class HousesController < ApplicationController
 
   def create
     self.resource = new_resource
+
+    if resource.address != nil
+      gg = geocode
+      loc = gg.locate(resource.address)
+      resource.geocode = "#{loc.latitude} #{loc.longitude}"
+    end
     if resource.save
+      flash[:notice] = "Added new property"
       redirect_to houses_path
     else
+      flash[:error] = "Failed to save this property"
       render :action => "new"
     end
   end
+
   def update
     self.resource = find_resource
     resource.attributes = params[resource_name]
@@ -46,4 +55,8 @@ class HousesController < ApplicationController
   end
 
   private
+  def geocode
+    GoogleGeocode.new YAML.load_file("#{RAILS_ROOT}/config/gmaps_api_key.yml")[RAILS_ENV]
+  end
+
 end
