@@ -43,6 +43,13 @@ class HousesController < ApplicationController
     end
   end
 
+  def addmls
+    self.resource = new_resource
+    flash[:notice] = "Added new listing with MLS #{resource.mls}"
+    redirect_to houses_path
+
+  end
+
   def update
     self.resource = find_resource
     resource.attributes = params[resource_name]

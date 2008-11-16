@@ -1,10 +1,15 @@
+= flash[:notice]
+= flash[:error]
 .map
   = GMap.header
   = @map.to_html
   = @map.div(:width => 600, :height => 600)
 
 .houses
-  = link_to 'New house', new_house_path
+  = link_to 'Add A House', new_house_path
+  - form_for :house, @house, :url => :addmls_houses do |form|
+    = form.text_field :mls
+    = submit_tag 'Add House by MLS'
   - @houses.each do |house|
     %div.house
       %h1= link_to house.mls, house.link
