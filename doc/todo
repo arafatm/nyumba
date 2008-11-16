@@ -1,0 +1,8 @@
+TODO:
+- Geocode addresses for new properties listed
+- Parse http://www.realtor.com to get more info on a property
+- Get pictures to display on a property
+- Add the following fields: notes, rating, tags, sq. ft., type, days listed, style, basement, garage, county, subdivision
+- Check out http://github.com/hcatlin/make_resourceful/tree/master
+- Check out http://github.com/rsl/skinny_spec/tree/master
+- Check out http://github.com/adzap/make_resourceful_with_pagination/tree/master
