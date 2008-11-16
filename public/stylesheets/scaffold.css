@@ -59,3 +59,15 @@ label {
   width: 10em;
   text-align: right;
   padding: 1ex 1em; }
+
+div.map {
+  float: left;
+  display: block;
+  padding: 0em;
+  border: 1px solid black; }
+
+div.houses {
+  float: left;
+  display: block;
+  margin: 0ex 1ex;
+  padding: 0ex 1ex; }

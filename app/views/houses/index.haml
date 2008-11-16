@@ -1,22 +1,24 @@
-= GMap.header
-= @map.to_html
-= @map.div(:width => 600, :height => 600)
+.map
+  = GMap.header
+  = @map.to_html
+  = @map.div(:width => 600, :height => 600)
 
-- @houses.each do |house|
-  %div.house
-    %h1= link_to house.mls, house.link
-    = house.address
-    %br
-    = "(#{house.year}) "
-    = "$#{house.price} ($#{house.taxes})<BR>"
-    = "#{house.bedrooms} BR / "
-    = "#{house.bathrooms} BA "
-    = "#{house.acres} Acres"
-    = "($#{house.taxes}) "
-    %div
-      = link_to 'Show', house
-      = link_to 'Edit', edit_house_path(house)
-      = link_to 'Destroy', house, :confirm => 'Are you sure?', :method => :delete
-%br 
+.houses
+  = link_to 'New house', new_house_path
+  - @houses.each do |house|
+    %div.house
+      %h1= link_to house.mls, house.link
+      = house.address
+      %br
+      = "(#{house.year}) "
+      = "$#{house.price} ($#{house.taxes})<BR>"
+      = "#{house.bedrooms} BR / "
+      = "#{house.bathrooms} BA "
+      = "#{house.acres} Acres"
+      = "($#{house.taxes}) "
+      %div
+        = link_to 'Show', house
+        = link_to 'Edit', edit_house_path(house)
+        = link_to 'Destroy', house, :confirm => 'Are you sure?', :method => :delete
+  %br 
 
-= link_to 'New house', new_house_path
