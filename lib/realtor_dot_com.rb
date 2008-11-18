@@ -38,6 +38,9 @@ class RealtorDotCom
     listing[:size] = info[/\d+(,\d+)? Sq Ft/][0..-7].gsub!(/[^\d]/, '')
     listing[:acre] = info[/\d+(.\d+)? Acres/][0..-7]
 
+    # Set up additional information
+    misc = page.search("div.ldpPropInfo")[0].inner_html
+    listing[:year] = misc[/Year Built: \d+/][12..-1]
     listing
   end
 end
