@@ -1,6 +1,7 @@
 TODO:
-- Geocode addresses for new properties listed
-- Parse http://www.realtor.com to get more info on a property
+- Add house_summary and house_details helpers for display on map and listing
+X Geocode addresses for new properties listed
+X Parse http://www.realtor.com to get more info on a property
 - Get pictures to display on a property
 - Add the following fields: notes, rating, tags, sq. ft., type, days listed, style, basement, garage, county, subdivision
 - Check out http://github.com/hcatlin/make_resourceful/tree/master
