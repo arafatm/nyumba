@@ -7,7 +7,7 @@
 
 .houses
   = link_to 'Add A House', new_house_path
-  - form_for :house, @house, :url => :addmls_houses do |form|
+  - form_for :house, @house, :url => { :action => :mls } do |form|
     = form.text_field :mls
     = submit_tag 'Add House by MLS'
   - @houses.each do |house|

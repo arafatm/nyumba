@@ -33,10 +33,10 @@ class RealtorDotCom
 
     # Set up beds, baths, size in acreage
     info   =  page.search("div.hsLDPrw3")[0].inner_html
-    listing[:bed]  = info[/\d+ Bed/][0..-5]
-    listing[:bath] = info[/\d+(.\d+)? Bath/][0..-6]
-    listing[:size] = info[/\d+(,\d+)? Sq Ft/][0..-7].gsub!(/[^\d]/, '')
-    listing[:acre] = info[/\d+(.\d+)? Acres/][0..-7]
+    listing[:bedrooms]  = info[/\d+ Bed/][0..-5]
+    listing[:bathrooms] = info[/\d+(.\d+)? Bath/][0..-6]
+    #listing[:size] = info[/\d+(,\d+)? Sq Ft/][0..-7].gsub!(/[^\d]/, '')
+    listing[:acres] = info[/\d+(.\d+)? Acres/][0..-7]
 
     # Set up additional information
     misc = page.search("div.ldpPropInfo")[0].inner_html
