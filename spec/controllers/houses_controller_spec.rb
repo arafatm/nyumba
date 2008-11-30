@@ -39,4 +39,6 @@ describe HousesController do
       get :index
     end
   end
+
+  it_should_behave_like 'a RESTful controller with a show action'
 end
