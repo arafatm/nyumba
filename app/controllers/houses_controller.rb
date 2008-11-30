@@ -42,7 +42,6 @@ class HousesController < ApplicationController
   end
 
   def mls
-    debugger
     house = House.new
     house.mls = params[:house][:mls]
     parser = RealtorDotCom.new
@@ -56,7 +55,6 @@ class HousesController < ApplicationController
       flash[:error] = "Unable to save this listing. Please verify and try again"
     end
     redirect_to houses_path
-
   end
 
   def update
