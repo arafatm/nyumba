@@ -41,4 +41,9 @@ describe HousesController do
   end
 
   it_should_behave_like 'a RESTful controller with a show action'
+  #TODO it_should_behave_like 'a RESTful controller with a create action'
+  it_should_behave_like 'a RESTful controller with a new action'
+  it_should_behave_like 'a RESTful controller with an edit action'
+  #TODO it_should_behave_like 'a RESTful controller with an update action'
+  it_should_behave_like 'a RESTful controller with a destroy action'
 end
