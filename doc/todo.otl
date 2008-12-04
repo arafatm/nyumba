@@ -1,0 +1,12 @@
+TODO:
+	Add house_summary and house_details helpers for display on map and listing
+	Get pictures to display on a property
+	Add the following fields: notes, rating, tags, sq. ft., type, days listed, style, basement, garage, county, subdivision
+	Check out http://github.com/rsl/skinny_spec/tree/master
+
+QUESTIONS:
+	Why is shared behaviors not working?
+
+DONE:
+	X Geocode addresses for new properties listed
+	X Parse http://www.realtor.com to get more info on a property
