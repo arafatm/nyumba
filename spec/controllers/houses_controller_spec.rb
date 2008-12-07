@@ -3,8 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe HousesController do
 
   # it_should_behave_like 'a RESTful controller with an index action'
-  describe 'handling GET /plural (index)' do
-
+  describe 'handling index (GET /plural)' do
     it 'should be successful' do
       get :index
       response.should be_success
@@ -29,15 +28,38 @@ describe HousesController do
     end
   end
 
-  describe 'handling POST /singular (create)' do
+  describe 'handling create (POST /singular)' do
     describe 'when successful' do
+      it 'should geocode the house'
       it 'should save the house'
       it 'should flash a success notice'
       it 'should redirect to index'
     end
     describe 'when unsuccessful' do
       it 'should flash an error notice'
-      it 'should rerender the new record form'
+      it 'should rerender the new house form'
+    end
+  end
+
+  describe 'handling update (POST /singular)' do
+    it 'should find the house being updated'
+    describe 'when successful' do
+      it 'should redirect to index'
+    end
+    describe 'when unsuccessful' do
+      it 'should rerender the house form'
+    end
+  end
+
+  describe 'handling mls (POST /singular)' do
+    it 'should find the house being updated'
+    it 'should receive an mls number'
+    it 'should find the house from a 3rd party mls listing'
+    describe 'when successful' do
+      it 'should redirect to index'
+    end
+    describe 'when unsuccessful' do
+      it 'should rerender the house form'
     end
   end
 end
