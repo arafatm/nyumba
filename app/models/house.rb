@@ -6,8 +6,7 @@ class House < ActiveRecord::Base
   def geocode
     gg = load_geocode_key
     loc = gg.locate(self.address)
-    self.latitude   = loc.latitude
-    self.longitude  = loc.longitude
+    self.geocode   = "#{loc.latitude} #{loc.longitude}"
   end
 
   private
