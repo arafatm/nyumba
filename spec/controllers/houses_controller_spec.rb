@@ -16,13 +16,12 @@ describe HousesController do
 
     it 'should assign houses for the view' do
       houses = [House.generate!, House.generate!, House.generate!]
-      houses.stubs(:find).with(:all).returns(houses)
+      House.stubs(:find).with(:all).returns(houses)
       get :index
       assigns[:houses].should  == houses
     end
 
     it 'should assign a google map' do
-      #TODO: Why does map.expects(:new) not work?
       get :index
       assigns[:map].should_not be_nil
     end
