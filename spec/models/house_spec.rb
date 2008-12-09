@@ -5,7 +5,7 @@ describe House do
     @house = House.new
   end
 
-  describe 'attributes' do
+  describe '' do
     it 'can have an MLS listing' do
       @house.should respond_to(:mls)
     end
@@ -47,7 +47,7 @@ describe House do
     end
   end
 
-  describe 'operations' do
+  describe '' do
     it 'can geocode an address' do
     end
   end
