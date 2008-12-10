@@ -3,7 +3,17 @@ class House < ActiveRecord::Base
 
   validates_presence_of :address
 
-  def geocode
+  def geocode_address
+    self.geocode = lookup_address(address)
+  end
+
+  def lookup_address(address)
+    GoogleGeocode.new(geocode_config)
+  end
+
+
+  def old_geocode
+    
     gg = load_geocode_key
     loc = gg.locate(self.address)
     self.geocode   = "#{loc.latitude} #{loc.longitude}"
