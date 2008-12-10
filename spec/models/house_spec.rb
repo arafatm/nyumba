@@ -47,60 +47,91 @@ describe House do
     end
   end
 
-  describe '' do
-    it 'should geocode the address' do
-      @address = 'foo'
-      h = House.new(:address => @address)
-      h.expects(:lookup_address).with(@address)
-      h.geocode_address
+  describe 'geocoding' do
+    before :each do
+      @house = House.generate!
     end
 
-    it 'should save the geocoded address' do
-      h = House.new
-      h.stubs(:lookup_address).returns('the geocode')
-      h.geocode_address
-      h.geocode.should == 'the geocode'
+    it 'should set the geocode using the Google geocoder' do
+      @house.stubs(:geocode_with_google).returns('some geocode')
+      @house.geocode_address
+      @house.geocode.should == 'some geocode'
     end
 
-    describe 'when looking up an address' do
+    describe 'with Google geocoder' do
       before :each do
-        @address = 'the address'
-        @config = 'config'
-        @house = House.new
-        @house.stubs(:geocode_config).returns(@config)
+        @google_geocoder = stub('GoogleGoecode')
       end
-
-      it 'should require an address' do
-        lambda { @house.lookup_address() }.should raise_error(ArgumentError)
+      it 'should create an instance of GoogleGeocode' do
+        GoogleGeocode.expects(:new).returns(@google_geocoder)
+        @google_geocoder.stubs(:locate)
+        @house.geocode_address
       end
+      it 'should load the config file with the API key'
 
-      it 'should create a Google geocoder' do
-        GoogleGeocode.expects(:new)
-        @house.lookup_address(@address)
-      end
+      it 'should have the Google geocoder locate the address'
 
-      it 'should use the geocode config file when creating the Google geocoder' do
-        @house.stubs(:geocode_config).returns(@config)
-        GoogleGeocode.expects(:new).with(@config)
-        @house.lookup_address(@address)
-      end
+      it 'should return a valid geocode for a valid address'
 
-      it 'should lookup the address via the geocoder'
-      it 'should return the geocoding result'
+      it 'should return an error code for an invalid address'
+
+      it 'should set the geocode attribute for a valid returned geocode'
+
     end
 
+    # it 'should geocode the address' do
+    #   @address = 'foo'
+    #   h = House.new(:address => @address)
+    #   h.expects(:lookup_address).with(@address)
+    #   h.geocode_address
+    # end
 
-    it 'can geocode an address' do
-      pending('foo')
-      gg = mock(GoogleGeocode)
-      GoogleGeocode.stubs(:new).returns(gg)
-      loc = mock(GoogleGeocode::Location)
-      GoogleGeocode.stubs(:locate).with("some address").returns(loc)
-      GoogleGeocode::Location.stubs(:latitude).returns('some_latitude')
-      GoogleGeocode::Location.stubs(:longitude).returns('some_longitude')
-      house = House.new
-      house.address = 'some address'
-      house.geocode
-    end
+    # it 'should save the geocoded address' do
+    #   h = House.new
+    #   h.stubs(:lookup_address).returns('the geocode')
+    #   h.geocode_address
+    #   h.geocode.should == 'the geocode'
+    # end
+
+    # describe 'when looking up an address' do
+    #   before :each do
+    #     @address = 'the address'
+    #     @config = 'config'
+    #     @house = House.new
+    #     @house.stubs(:geocode_config).returns(@config)
+    #   end
+
+    #   it 'should require an address' do
+    #     lambda { @house.lookup_address() }.should raise_error(ArgumentError)
+    #   end
+
+    #   it 'should create a Google geocoder' do
+    #     GoogleGeocode.expects(:new)
+    #     @house.lookup_address(@address)
+    #   end
+
+    #   it 'should use the geocode config file when creating the Google geocoder' do
+    #     @house.stubs(:geocode_config).returns(@config)
+    #     GoogleGeocode.expects(:new).with(@config)
+    #     @house.lookup_address(@address)
+    #   end
+
+    #   it 'should lookup the address via the geocoder'
+    #   it 'should return the geocoding result'
+    # end
+
+
+    # it 'can geocode an address' do
+    #   pending('foo')
+    #   gg = mock(GoogleGeocode)
+    #   GoogleGeocode.stubs(:new).returns(gg)
+    #   loc = mock(GoogleGeocode::Location)
+    #   GoogleGeocode.stubs(:locate).with("some address").returns(loc)
+    #   GoogleGeocode::Location.stubs(:latitude).returns('some_latitude')
+    #   GoogleGeocode::Location.stubs(:longitude).returns('some_longitude')
+    #   house = House.new
+    #   house.address = 'some address'
+    #   house.geocode
+    # end
   end
 end

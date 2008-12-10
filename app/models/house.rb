@@ -4,13 +4,8 @@ class House < ActiveRecord::Base
   validates_presence_of :address
 
   def geocode_address
-    self.geocode = lookup_address(address)
+    self.geocode = geocode_with_google(self.address)
   end
-
-  def lookup_address(address)
-    GoogleGeocode.new(geocode_config)
-  end
-
 
   def old_geocode
     
@@ -21,9 +16,17 @@ class House < ActiveRecord::Base
 
   private
 
-  def load_geocode_key
-    gconf = "#{RAILS_ROOT}/config/gmaps_api_key.yml"
-    GoogleGeocode.new(YAML.load_file(gconf)[RAILS_ENV])
+  def geocode_with_google(address)
+    google_geocoder = create_google_geocoder
+    google_geocoder.locate
   end
 
+  def create_google_geocoder
+    GoogleGeocode.new(load_google_config)
+  end
+
+  def load_google_config
+    YAML.load_file(
+      "#{RAILS_ROOT}/config/gmaps_api_key.yml")[RAILS_ENV]
+  end
 end
