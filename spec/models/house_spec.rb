@@ -47,8 +47,8 @@ describe House do
     end
   end
 
-  describe 'geocoder' do
-    it 'should look up the address' do
+  describe '' do
+    it 'should geocode the address' do
       @address = 'foo'
       h = House.new(:address => @address)
       h.expects(:lookup_address).with(@address)
@@ -70,19 +70,23 @@ describe House do
         @house.stubs(:geocode_config).returns(@config)
       end
 
+      it 'should require an address' do
+        lambda { @house.lookup_address() }.should raise_error(ArgumentError)
+      end
+
       it 'should create a Google geocoder' do
         GoogleGeocode.expects(:new)
-        @house.geocode_address
+        @house.lookup_address(@address)
       end
 
       it 'should use the geocode config file when creating the Google geocoder' do
         @house.stubs(:geocode_config).returns(@config)
         GoogleGeocode.expects(:new).with(@config)
-        @house.geocode_address
+        @house.lookup_address(@address)
       end
 
       it 'should lookup the address via the geocoder'
-      it 'should return the geocoded result'
+      it 'should return the geocoding result'
     end
 
 
