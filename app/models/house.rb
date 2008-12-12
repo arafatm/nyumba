@@ -4,7 +4,8 @@ class House < ActiveRecord::Base
   validates_presence_of :address
 
   def geocode_address
-    self.geocode = geocode_with_google(self.address)
+    loc = geocode_with_google(self.address)
+    self.geocode = "#{loc.latitude} #{loc.longitude}"
   end
 
   def old_geocode
@@ -18,7 +19,7 @@ class House < ActiveRecord::Base
 
   def geocode_with_google(address)
     google_geocoder = create_google_geocoder
-    google_geocoder.locate
+    google_geocoder.locate(address)
   end
 
   def create_google_geocoder
