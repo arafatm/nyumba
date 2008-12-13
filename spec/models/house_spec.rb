@@ -52,6 +52,13 @@ describe House do
       house.errors.on(:address).should eql("can't be blank")
     end
   end
+  describe 'before filters' do
+    it 'should geocode the address before saving' do
+      @house = House.generate!(:geocode => nil)
+      @house.expects(:geocode_address)
+      @house.save
+    end
+  end
 
   describe 'geocoding' do
     before :each do
@@ -64,6 +71,19 @@ describe House do
         @location.address = "1 Titans Way, Nashville, TN 37213, USA"
         @location.latitude = "36"
         @location.longitude = "83"
+    end
+
+    it 'should try to geocode on save' do
+      @house.expects(:geocode_address)
+      @house.save
+    end
+
+    it 'should not geocode if address is empty' do
+      pending "How do I test should not save?"
+    end
+
+    it 'should not geocode if it already has geocode' do
+      pending "How do I test should not save?"
     end
 
     it 'should set a location' do

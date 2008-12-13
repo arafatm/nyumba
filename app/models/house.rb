@@ -3,16 +3,13 @@ class House < ActiveRecord::Base
 
   validates_presence_of :address
 
-  def geocode_address
-    loc = geocode_with_google(self.address)
-    self.geocode = "#{loc.latitude} #{loc.longitude}"
-  end
+  before_save :geocode_address
 
-  def old_geocode
-    
-    gg = load_geocode_key
-    loc = gg.locate(self.address)
-    self.geocode   = "#{loc.latitude} #{loc.longitude}"
+  def geocode_address
+    if (address != nil) && (geocode == nil)
+      loc = geocode_with_google(self.address)
+      self.geocode = "#{loc.latitude} #{loc.longitude}"
+    end
   end
 
   private
