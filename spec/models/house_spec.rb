@@ -62,7 +62,8 @@ describe House do
 
   describe 'geocoding' do
     before :each do
-      @house = House.generate!(:address => '1 Titans Way, Nashville, TN')
+      @house = House.generate!(:address => '1 Titans Way, Nashville, TN',
+                              :geocode => nil)
 
       @geocoder = GoogleGeocode.new(
         YAML.load_file("#{RAILS_ROOT}/config/gmaps_api_key.yml")[RAILS_ENV])

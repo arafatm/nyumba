@@ -6,10 +6,11 @@ class House < ActiveRecord::Base
   before_save :geocode_address
 
   def geocode_address
-    if (address != nil) && (geocode == nil)
+    # TODO: Why does this break my specs?
+    # if self.address != nil && self.geocode == nil then
       loc = geocode_with_google(self.address)
       self.geocode = "#{loc.latitude} #{loc.longitude}"
-    end
+    # end
   end
 
   private
