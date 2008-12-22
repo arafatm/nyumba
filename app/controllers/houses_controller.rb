@@ -13,9 +13,6 @@ class HousesController < ApplicationController
   def create
     self.resource = new_resource
 
-    if resource.address != nil
-      resource.geocode = geocode(resource.address)
-    end
     if resource.save
       flash[:notice] = "Added new property"
       redirect_to houses_path
@@ -56,12 +53,6 @@ class HousesController < ApplicationController
 
   def load_geocode_key
     GoogleGeocode.new YAML.load_file("#{RAILS_ROOT}/config/gmaps_api_key.yml")[RAILS_ENV]
-  end
-
-  def geocode(address)
-    gg = load_geocode_key
-    loc = gg.locate(address)
-    "#{loc.latitude} #{loc.longitude}"
   end
 
   def gmap(houses)
